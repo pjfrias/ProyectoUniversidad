@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MaterialData {
+public class MateriaData {
     
     private Connection con;
 
-    public MaterialData(Connection con) {
+    public MateriaData(Connection con) {
         this.con = con;
     }
  
