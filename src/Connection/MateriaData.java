@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
@@ -22,7 +21,7 @@ public class MateriaData {
     }
  
     public void guardarMateria(Materia materia){
-        int registros = 0;
+        int registros;
         String sql = "INSERT INTO materia(nombre, año, estado) "
                 + "VALUES (?, ?, ?)";
          
@@ -94,7 +93,7 @@ public class MateriaData {
     
     public void eliminarMateria(int id){
         try{
-            String sql = "UPDATE materia SET estado= ? WHERE idMateria = ? ";                
+            String sql = "UPDATE materia SET estado= 0 WHERE idMateria = ? ";                
             PreparedStatement ps = con.prepareStatement(sql);    
             ps.setInt(1, id); 
             int fila = ps.executeUpdate(); 
@@ -112,7 +111,7 @@ public class MateriaData {
     public List<Materia> listarMaterias(){
         List<Materia> materias = new ArrayList<>();
         try{
-            String sql = "SELECT * FROM `materia` WHERE 1";
+            String sql = "SELECT * FROM materia WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);  
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
