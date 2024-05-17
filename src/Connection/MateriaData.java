@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,40 +17,59 @@ public class MateriaData {
     
     private Connection con;
 
-    public MateriaData(Connection con) {
-        this.con = con;
+    public MateriaData() {
+        this.con = Conexion.getConexion();
     }
  
-    public void guardarMateria(Materia materia)  throws SQLException{
+    public void guardarMateria(Materia materia){
+        int registros = 0;
         String sql = "INSERT INTO materia(nombre, año, estado) "
-                + "VALUES (?, ?, ?, ?)";
-        PreparedStatement ps;
-        int registros;
-    
-        ps = con.prepareStatement(sql);
-        ps.setString(1, materia.getNombre());
-        ps.setInt(2, materia.getAnioMateria());
-        ps.setBoolean(3, true);          
-    
-        registros = ps.executeUpdate();
-        System.out.println(registros);
-        
+                + "VALUES (?, ?, ?)";
+         
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setBoolean(3, materia.isActivo()); 
+            
+            registros = ps.executeUpdate(); //GUARDAMOS LA CANTIDAD DE FILAS AFECTADAS
+            ResultSet rs = ps.getGeneratedKeys(); //GUARDAMOS EL CONJUNTO DE CLAVES AUTOGENERADAS
+            
+            if (registros == 1) { // ES UNA FORMA DE CONTAR CUANTAS FILAS SE AGREGARON
+                rs.next();
+                JOptionPane.showMessageDialog(null, "Se ha creado la materia "+materia.getNombre()+" id = "+rs.getInt("idMateria"));
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia"+ ex.getMessage());
+            ex.printStackTrace();  
+        }
     }
     
-    public Materia buscarMateria(int id)throws SQLException{
-        String sql = "SELECT * FROM `materia` WHERE idMateria = ?";
+    public Materia buscarMateria(int id){
+        String sql = "SELECT * FROM `materia` WHERE idMateria = ? and estado = 1";
         PreparedStatement ps;        
         ResultSet resultados;
-        Materia objeto = null;
+        Materia materiaEncontrada = null;
            
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, id);
-        resultados = ps.executeQuery();
-        while(resultados.next()){
-            objeto =new Materia(resultados.getString(2), resultados.getInt(3), resultados.getBoolean(4));
-        }       
-        return objeto;        
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            resultados = ps.executeQuery();
+            
+            if(resultados.next()){
+                materiaEncontrada = new Materia(resultados.getInt("idMateria"), resultados.getString("nombre"), resultados.getInt("año"), resultados.getBoolean("estado"));
+            }
+            else JOptionPane.showMessageDialog(null, "No se encuentra la materia");
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo acceder a la tabla MATERIA");
+        }
+        return materiaEncontrada;        
     }
+
     
     public void modificarMateria (Materia materia){
         String sql = "UPDATE materia SET nombre= ?,año = ? WHERE idMateria = ? ";
