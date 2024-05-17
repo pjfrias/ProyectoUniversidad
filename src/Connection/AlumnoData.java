@@ -131,9 +131,9 @@ public class AlumnoData {
             int exito = ps.executeUpdate(); 
 
             if(exito == 1){ 
-            JOptionPane.showMessageDialog(null, "Modificado Exitosamente."); 
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente."); 
             }else{ 
-            JOptionPane.showMessageDialog(null, "El alumno no existe"); 
+                JOptionPane.showMessageDialog(null, "El alumno no existe"); 
             } 
 
         }catch(SQLException ex){ 
@@ -146,15 +146,15 @@ public class AlumnoData {
             String sql = "UPDATE alumno SET estado = 0 WHERE idAlumno = ? "; 
             PreparedStatement ps = con.prepareStatement(sql); 
             ps.setInt(1, id); 
-            int fila=ps.executeUpdate(); 
+            int fila = ps.executeUpdate(); 
 
             if(fila==1){ 
                 JOptionPane.showMessageDialog(null, " Se eliminó el alumno."); 
             } 
             ps.close(); 
-            }catch(SQLException e){ 
-                JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno"); 
-            } 
+        }catch(SQLException e){ 
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Alumno"); 
+        } 
     }
 }
     

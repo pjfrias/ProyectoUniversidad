@@ -8,6 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class MateriaData {
     
@@ -48,32 +51,42 @@ public class MateriaData {
         return objeto;        
     }
     
-    public void modificarMateria (Materia materia) throws SQLException{
+    public void modificarMateria (Materia materia){
         String sql = "UPDATE materia SET nombre= ?,año = ? WHERE idMateria = ? ";
-        PreparedStatement ps;
-        int registros;
-    
-        ps = con.prepareStatement(sql);
-        ps.setString(1, materia.getNombre());
-        ps.setInt(2, materia.getAnioMateria());
-        ps.setInt(3, materia.getIdMateria());               
-    
-        registros = ps.executeUpdate();
-        System.out.println(registros);
+        PreparedStatement ps = null;
         
+        try{
+            ps = con.prepareStatement(sql);
+            ps.setString(1, materia.getNombre());
+            ps.setInt(2, materia.getAnioMateria());
+            ps.setInt(3, materia.getIdMateria());  
+            int exito = ps.executeUpdate();
+            if(exito == 1){ 
+                JOptionPane.showMessageDialog(null, "Modificado Exitosamente."); 
+            }else{ 
+                JOptionPane.showMessageDialog(null, "La materia no existe"); 
+            } 
+        }catch (SQLException ex) {
+            Logger.getLogger(null, "Error al acceder a la tabla Materia "+ ex.getMessage());
+        }
+                
     }
     
-    public void eliminarMateria(int id) throws SQLException{
-        String sql = "UPDATE materia SET estado= ? WHERE idMateria = ? ";                
-        PreparedStatement ps;
-        int registros;
+    public void eliminarMateria(int id){
+        try{
+            String sql = "UPDATE materia SET estado= ? WHERE idMateria = ? ";                
+            PreparedStatement ps = con.prepareStatement(sql);    
+            ps.setInt(1, id); 
+            int fila = ps.executeUpdate(); 
+
+            if(fila ==1 ){ 
+                JOptionPane.showMessageDialog(null, " Se eliminó la materia."); 
+            } 
+            ps.close(); 
+        }catch(SQLException ex) {
+            Logger.getLogger(null, " Error al acceder a la tabla Materia");
+        }                  
     
-        ps = con.prepareStatement(sql);       
-        ps.setBoolean(1, false);
-        ps.setInt(2,id);               
-    
-        registros = ps.executeUpdate();
-        System.out.println(registros);
     }
     
     public List<Materia> listarMaterias() throws SQLException{

@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 public class Conexion {
    
    private static final String DRIVER = "org.mariadb.jdbc.Driver";
-   private static final String URL = "jdbc:mysql://localhost/universidadulp";
+   private static final String URL = "jdbc:mariadb://localhost:3306/universidadulp";
    private static final String USUARIO = "root";
    private static final String PASSWORD = "";
    
