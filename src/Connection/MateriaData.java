@@ -89,17 +89,23 @@ public class MateriaData {
     
     }
     
-    public List<Materia> listarMaterias() throws SQLException{
-        String sql = "SELECT * FROM `materia` WHERE 1";
-        PreparedStatement ps;        
-        ResultSet resultados;
-        List<Materia> lista = new ArrayList<>();
-           
-        ps = con.prepareStatement(sql);        
-        resultados = ps.executeQuery();
-        while(resultados.next()){
-            lista.add(new Materia(resultados.getInt(1),resultados.getString(2), resultados.getInt(3), resultados.getBoolean(4)));
-        }       
-        return lista;        
+    public List<Materia> listarMaterias(){
+        List<Materia> materias = new ArrayList<>();
+        try{
+            String sql = "SELECT * FROM `materia` WHERE 1";
+            PreparedStatement ps = con.prepareStatement(sql);  
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Materia materia = new Materia();
+                materia.setIdMateria(rs.getInt("idMateria"));
+                materia.setNombre(rs.getString("nombre"));
+                materia.setAnioMateria(rs.getInt("año"));
+                materia.setActivo(rs.getBoolean("estado"));
+                materias.add(materia);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Materias "+ ex.getMessage());
+        }    
+        return materias;
     }
 }
