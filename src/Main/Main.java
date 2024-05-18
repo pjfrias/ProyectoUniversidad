@@ -2,7 +2,10 @@ package main;
 
 import Connection.AlumnoData;
 import Connection.MateriaData;
+import Entidades.Alumno;
 import Entidades.Materia;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class Main {
     
