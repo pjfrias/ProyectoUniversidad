@@ -81,16 +81,10 @@ public class Alumno {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Alumno{");
-        sb.append("idAlumno=").append(idAlumno);
-        sb.append(", apellido=").append(apellido);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", fechaNac=").append(fechaNac);
-        sb.append(", activo=").append(activo);
-        sb.append('}');
-        return sb.toString();
+        return idAlumno + "- dni=" + dni + "- " + apellido + ", " + nombre + ", nacido el " + fechaNac + ", activo" + activo + '}';
     }
+
+    
     
     
 }
