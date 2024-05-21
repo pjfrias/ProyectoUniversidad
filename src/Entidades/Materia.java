@@ -58,12 +58,9 @@ public class Materia {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Materia{");
-        sb.append("idMateria=").append(idMateria);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", anioMateria=").append(anioMateria);
-        sb.append(", activo=").append(activo);
-        sb.append('}');
+        sb.append(idMateria);
+        sb.append(", ").append(nombre);
+        sb.append(", anio=").append(anioMateria);
         return sb.toString();
     }
     

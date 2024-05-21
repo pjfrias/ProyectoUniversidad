@@ -24,12 +24,16 @@ public class Main {
         System.out.println(" | 2 - Buscar alumno por id                   |");
         System.out.println(" | 3 - Buscar alumno por DNI                  |");
         System.out.println(" | 4 - Actualizar datos alumno                |");
-        System.out.println(" | 5 - Borrar alumno                          |");
+        System.out.println(" | 5 - Listar alumnos                         |");
+        System.out.println(" | 6 - Borrar alumno                          |");
+        System.out.println(" |                                            |");
         System.out.println(" |    ------------ MATERIAS -------------     |");
-        System.out.println(" | 6 - Agregar materia                        |");
-        System.out.println(" | 7 - Buscar materia por id                  |");
-        System.out.println(" | 8 - Borrar materia                         |");
-        System.out.println(" | 9 - SALIR                                  |");
+        System.out.println(" | 7 - Agregar materia                        |");
+        System.out.println(" | 8 - Buscar materia por id                  |");
+        System.out.println(" | 9 - Actualizar materia                     |");
+        System.out.println(" | 10 - Listar materias por                   |");
+        System.out.println(" | 11 - Borrar materia                        |");
+        System.out.println(" | 12 - SALIR                                 |");
         System.out.println(" |============================================|");
         
         
@@ -111,11 +115,19 @@ public class Main {
                         System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
                     break;
                     
-
                 case 5:
+                        System.out.println("\n======= Listado de alumnos =======\n");
+                        for (Alumno alum : alumno.listarAlumnos()) {
+                            System.out.println(alum.getApellido()+", "+alum.getNombre()+" DNI: "+alum.getDni());
+                        }
+                        System.out.println("");
+
+                    break;
+
+                case 6:
                     
                     if(alumnoComun != null){
-                        System.out.print("Desea borrar al alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        System.out.print("Desea borrar al alumno actual (s/n)"+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" -->");
                         
                         if(scan.next().startsWith("s"))
                             alumno.eliminarAlumno(alumnoComun.getIdAlumno());
@@ -125,19 +137,63 @@ public class Main {
                         System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
                     break;
 
-                case 6:
-                        System.out.println("A IMPLEMENTAR");
-                    break;
-
                 case 7:
-                        System.out.println("A IMPLEMENTAR");
+                        System.out.print("Ingrese el nombre de la materia -->");
+                        String nombreMateria = scan.next();
+                        System.out.print("Ingrese el anio de cursado de la materia -->");
+                        int anioCursado = scan.nextInt();
+                        materiaComun = new Materia(nombreMateria, anioCursado, true);
+                        materia.guardarMateria(materiaComun);
                     break;
 
                 case 8:
-                        System.out.println("A IMPLEMENTAR");
+                        System.out.print("Ingrese el id de la materia a buscar -->");
+                        id = scan.nextInt();
+                        materiaComun = materia.buscarMateria(id);
+
+                        if(materiaComun != null){
+                            System.out.println(materiaComun);
+                        }
+                    break;
+                    
+                case 9:
+                        if(materiaComun != null){
+                        System.out.print("Desea actualizar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+"--> ");
+                        
+                        if(scan.next().startsWith("s")){
+                            System.out.print("Ingrese el nombre de la materia -->");
+                            materiaComun.setNombre(scan.next());
+                            System.out.print("Ingrese el ano de cursada -->");
+                            materiaComun.setAnioMateria(scan.nextInt());
+                            materia.modificarMateria(materiaComun);
+                        }
+                        else
+                            System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
+                    }else
+                        System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
+                    break;
+                        
+                case 10:
+                        System.out.println("\n======= Listado de materias =======\n");
+                        for (Materia mater : materia.listarMaterias()) {
+                            System.out.println(mater.getNombre()+", "+mater.getAnioMateria()+" ANIO");
+                        }
+                        System.out.println("");
+                        break;
+
+                case 11:
+                        if(materiaComun != null){
+                        System.out.print("Desea borrar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" -->");
+                        
+                        if(scan.next().startsWith("s"))
+                            materia.eliminarMateria(materiaComun.getIdMateria());
+                        else
+                            System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
+                    }else
+                        System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
                     break;
             }
-        }while(opc != 9);
+        }while(opc != 12);
         
         //alumno.guardarAlumno(new Alumno(1,23454321,"Lopez","Gerardo",LocalDate.of(2002, Month.MARCH, 23),true));
         
