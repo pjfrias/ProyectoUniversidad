@@ -32,10 +32,17 @@ public class Main {
         System.out.println(" | 8 - Buscar materia por id                  |");
         System.out.println(" | 9 - Actualizar materia                     |");
         System.out.println(" | 10 - Listar materias por                   |");
+        System.out.println(" | 11 - Borrar materia                        |"); 
+        System.out.println(" |============================================|");
+        System.out.println(" |    ------------ INSCRIPCIONES -------------|");
+        System.out.println(" | 12 - Agregar inscripcion                   |");
+        System.out.println(" | 13 - Buscar materia por id                  |");
+        System.out.println(" | 14 - Actualizar materia                     |");
+        System.out.println(" | 15 - Listar materias por                   |");
         System.out.println(" | 11 - Borrar materia                        |");
         System.out.println(" | 12 - SALIR                                 |");
         System.out.println(" |============================================|");
-        
+        System.out.println(" | 12 - SALIR                                 |");
         
         int opc;
         
