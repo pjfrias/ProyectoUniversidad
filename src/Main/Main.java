@@ -31,16 +31,18 @@ public class Main {
         System.out.println(" | 7 - Agregar materia                        |");
         System.out.println(" | 8 - Buscar materia por id                  |");
         System.out.println(" | 9 - Actualizar materia                     |");
-        System.out.println(" | 10 - Listar materias por                   |");
+        System.out.println(" | 10 - Listar materias                    |");
         System.out.println(" | 11 - Borrar materia                        |"); 
         System.out.println(" |============================================|");
         System.out.println(" |    ------------ INSCRIPCIONES -------------|");
         System.out.println(" | 12 - Agregar inscripcion                   |");
-        System.out.println(" | 13 - Buscar materia por id                  |");
-        System.out.println(" | 14 - Actualizar materia                     |");
-        System.out.println(" | 15 - Listar materias por                   |");
-        System.out.println(" | 11 - Borrar materia                        |");
-        System.out.println(" | 12 - SALIR                                 |");
+        System.out.println(" | 13 - Buscar Inscripcion por Alumno         |");
+        System.out.println(" | 14 - obtener materias cursadas             |");
+        System.out.println(" | 15 - obtener materias no cursadas          |");
+        System.out.println(" | 11 - Borrar inscripcion materia/alumno     |");
+        System.out.println(" | 12 - Actualizar nota                       |");
+        System.out.println(" | 13 - Listar alumnos por materia            |");
+        System.out.println(" | 12 - Actualizar nota                       |");  
         System.out.println(" |============================================|");
         System.out.println(" | 12 - SALIR                                 |");
         

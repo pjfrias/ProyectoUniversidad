@@ -48,22 +48,28 @@ public class InscripcionData {
     public List<Inscripcion> obtenerInscripciones(){
         List<Inscripcion> inscripciones = new ArrayList<>();
         try{
-            String sql = "SELECT * FROM inscripciones WHERE estado = 1";
+            String sql = "select a.nombre as nombreAlumno , a.apellido ,a.dni,m.nombre,i.nota from inscripcion i join alumno a on a.idAlumnno=i.idAlumno join materia m on m.idMateria=i.idMateria where a.estado= 1 and m.estado=1";
             PreparedStatement ps = con.prepareStatement(sql);  
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Materia materia = new Materia();
-                materia.setIdMateria(rs.getInt("idMateria"));
+                Inscripcion inscripcion = new Inscripcion();
+                Alumno alumno=new Alumno();
+                Materia materia=new Materia();
+                alumno.setNombre(rs.getString("nombreAlumno"));
+                alumno.setApellido(rs.getString("apellido"));
+                alumno.setDni(rs.getInt("dni"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("año"));
-                materia.setActivo(rs.getBoolean("estado"));
-                materias.add(materia);
+                inscripcion.setNota(rs.getDouble("nota"));
+            inscripcion.setAlumno(alumno);
+            inscripcion.setMateria(materia);
+            
+            inscripciones.add(inscripcion); 
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Materias "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla inscripciones "+ ex.getMessage());
         }    
-        return materias;
-        return null;
+        return inscripciones;
+        
     }
     
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
