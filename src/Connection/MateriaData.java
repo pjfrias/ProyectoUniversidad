@@ -21,7 +21,7 @@ public class MateriaData {
  
     public void guardarMateria(Materia materia){
         int registros;
-        String sql = "INSERT INTO materia(nombre, año, estado) "
+        String sql = "INSERT INTO materia(nombre, anio, estado) "
                 + "VALUES (?, ?, ?)";
          
         try {
@@ -70,7 +70,7 @@ public class MateriaData {
 
     
     public void modificarMateria (Materia materia){
-        String sql = "UPDATE materia SET nombre= ?,año = ? WHERE idMateria = ? ";
+        String sql = "UPDATE materia SET nombre= ?,anio = ? WHERE idMateria = ? ";
         PreparedStatement ps = null;
         
         try{
@@ -117,7 +117,7 @@ public class MateriaData {
                 Materia materia = new Materia();
                 materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
-                materia.setAnioMateria(rs.getInt("año"));
+                materia.setAnioMateria(rs.getInt("anio"));
                 materia.setActivo(rs.getBoolean("estado"));
                 materias.add(materia);
             }

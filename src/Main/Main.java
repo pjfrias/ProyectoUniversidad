@@ -37,6 +37,7 @@ public class Main {
         System.out.println(" | 9 - Actualizar materia                     |");
         System.out.println(" | 10 - Listar materias                       |");
         System.out.println(" | 11 - Borrar materia                        |"); 
+        System.out.println(" |                                            |"); 
         System.out.println(" |    ------------ INSCRIPCIONES -------------|");
         System.out.println(" | 12 - Agregar inscripcion                   |");
         System.out.println(" | 13 - Listar Inscripciones                  |");
@@ -48,7 +49,7 @@ public class Main {
         System.out.println(" | 19 - Listar alumnos por materia            |");
         System.out.println(" |============================================|");
         System.out.println(" | 20 - SALIR                                 |");
-        System.out.println(" |============================================|");
+        System.out.println(" ==============================================");
         
         int opc;
         
