@@ -58,7 +58,7 @@ public class MateriaData {
             resultados = ps.executeQuery();
             
             if(resultados.next()){
-                materiaEncontrada = new Materia(resultados.getInt("idMateria"), resultados.getString("nombre"), resultados.getInt("año"), resultados.getBoolean("estado"));
+                materiaEncontrada = new Materia(resultados.getInt("idMateria"), resultados.getString("nombre"), resultados.getInt("anio"), resultados.getBoolean("estado"));
             }
             else JOptionPane.showMessageDialog(null, "No se encuentra la materia");
             ps.close();
@@ -86,7 +86,7 @@ public class MateriaData {
                 JOptionPane.showMessageDialog(null, "La materia no existe"); 
             } 
         }catch (SQLException ex) {
-            Logger.getLogger(null, "Error al acceder a la tabla Materia "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia "+ ex.getMessage());
         }
                 
     }
@@ -103,7 +103,7 @@ public class MateriaData {
             } 
             ps.close(); 
         }catch(SQLException ex) {
-            Logger.getLogger(null, " Error al acceder a la tabla Materia");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materia");
         }                  
     
     }
@@ -123,7 +123,7 @@ public class MateriaData {
                 materias.add(materia);
             }
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Materias "+ ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Materias "+ ex.getMessage());
         }    
         return materias;
     }

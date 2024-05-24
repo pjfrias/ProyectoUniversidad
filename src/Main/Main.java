@@ -1,9 +1,11 @@
 package main;
 
-import Connection.AlumnoData;
 import Connection.MateriaData;
+import Connection.AlumnoData;
+import Connection.InscripcionData;
 import Entidades.Materia;
 import Entidades.Alumno;
+import Entidades.Inscripcion;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Scanner;
@@ -16,6 +18,8 @@ public class Main {
         Alumno alumnoComun = null;
         MateriaData materia = new MateriaData();
         Materia materiaComun = null;
+        InscripcionData inscripcion = new InscripcionData();
+        Inscripcion inscripcionComun = null;
         
         System.out.println(" ==== BIENVENIDO AL SISTEMA DE UNIVERSIDAD ====");
         System.out.println(" |                                            |");
@@ -31,20 +35,20 @@ public class Main {
         System.out.println(" | 7 - Agregar materia                        |");
         System.out.println(" | 8 - Buscar materia por id                  |");
         System.out.println(" | 9 - Actualizar materia                     |");
-        System.out.println(" | 10 - Listar materias                    |");
+        System.out.println(" | 10 - Listar materias                       |");
         System.out.println(" | 11 - Borrar materia                        |"); 
-        System.out.println(" |============================================|");
         System.out.println(" |    ------------ INSCRIPCIONES -------------|");
         System.out.println(" | 12 - Agregar inscripcion                   |");
-        System.out.println(" | 13 - Buscar Inscripcion por Alumno         |");
-        System.out.println(" | 14 - obtener materias cursadas             |");
-        System.out.println(" | 15 - obtener materias no cursadas          |");
-        System.out.println(" | 11 - Borrar inscripcion materia/alumno     |");
-        System.out.println(" | 12 - Actualizar nota                       |");
-        System.out.println(" | 13 - Listar alumnos por materia            |");
-        System.out.println(" | 12 - Actualizar nota                       |");  
+        System.out.println(" | 13 - Listar Inscripciones                  |");
+        System.out.println(" | 14 - Buscar Inscripciones por Alumno       |");
+        System.out.println(" | 15 - Materias cursadas por Alumno          |");
+        System.out.println(" | 16 - Materias no cursadas por Alumno       |");
+        System.out.println(" | 17 - Borrar inscripcion                    |");
+        System.out.println(" | 18 - Actualizar nota                       |");
+        System.out.println(" | 19 - Listar alumnos por materia            |");
         System.out.println(" |============================================|");
-        System.out.println(" | 12 - SALIR                                 |");
+        System.out.println(" | 20 - SALIR                                 |");
+        System.out.println(" |============================================|");
         
         int opc;
         
@@ -99,7 +103,7 @@ public class Main {
                 case 4:
                     
                     if(alumnoComun != null){
-                        System.out.print("Desea actualizar al alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        System.out.print("Desea actualizar al alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+"(s/n) -->");
                         
                         if(scan.next().startsWith("s")){
                             System.out.print("Ingrese el DNI -->");
@@ -183,52 +187,125 @@ public class Main {
                     break;
                         
                 case 10:
-                        System.out.println("\n======= Listado de materias =======\n");
-                        for (Materia mater : materia.listarMaterias()) {
-                            System.out.println(mater.getNombre()+", "+mater.getAnioMateria()+" ANIO");
-                        }
-                        System.out.println("");
-                        break;
+                    System.out.println("\n======= Listado de materias =======\n");
+                    for (Materia mater : materia.listarMaterias()) {
+                        System.out.println(mater.getNombre()+", "+mater.getAnioMateria()+" ANIO");
+                    }
+                    System.out.println("");
+                    break;
 
                 case 11:
-                        if(materiaComun != null){
-                        System.out.print("Desea borrar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" -->");
-                        
-                        if(scan.next().startsWith("s"))
-                            materia.eliminarMateria(materiaComun.getIdMateria());
-                        else
-                            System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
+                    if(materiaComun != null){
+                    System.out.print("Desea borrar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" -->");
+
+                    if(scan.next().startsWith("s"))
+                        materia.eliminarMateria(materiaComun.getIdMateria());
+                    else
+                        System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
                     }else
                         System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
                     break;
+                    
+                case 12:
+                    if(materiaComun != null && alumnoComun != null){
+                        System.out.print("Desea inscribir al alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
+                                            +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
+                        if (scan.next().startsWith("s")) {
+                            inscripcion = new InscripcionData();
+                            inscripcionComun.setAlumno(alumnoComun);
+                            inscripcionComun.setMateria(materiaComun);
+                            inscripcionComun.setNota(-1);
+                            inscripcion.guardarInscripcion(inscripcionComun);
+                            
+                        }else System.out.println("Debe realizar las busquedas del alumno y materia a inscribir.");
+                    }else System.out.println("Debe realizar las busquedas del alumno y materia a inscribir.");
+                    break;
+                    
+                case 13:
+                    System.out.println(" --------- INSCRIPCIONES REGISTRADAS ----------");
+                    for (Inscripcion inscr : inscripcion.obtenerInscripciones()) {
+                        System.out.println("Inscripcion nro: "+inscr.getIdInscripcion()+" - Alumno: "+inscr.getAlumno().getApellido()+", "+inscr.getAlumno().getNombre()+
+                                            " - Materia: "+inscr.getMateria().getNombre()+" de "+inscr.getMateria().getAnioMateria()+" ° anio");
+                    }
+                    
+                    break;
+                    
+                case 14:
+                    if (alumnoComun != null) {
+                    System.out.print("Desea listar las inscripciones del alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+"(s/n)--> ");
+                        if(scan.next().startsWith("s")){
+                            System.out.println(" --------- INSCRIPCIONES DE "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
+                            for(Inscripcion inscr : inscripcion.obtenerInscripcionesPorAlumno(alumnoComun.getIdAlumno())){
+                                System.out.println("Materia: "+inscr.getMateria().getNombre()+" de "+inscr.getMateria().getAnioMateria()+" ° anio con nota: "+inscr.getNota());
+                            }
+                        }
+                        else
+                            System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    break;
+                    
+                case 15:
+                    if (alumnoComun != null) {
+                        System.out.print("Desea listar las materias cursadas del alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        if(scan.next().startsWith("s")){
+                            System.out.println(" --------- MATERIAS CURSADAS POR "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
+                            for(Materia mat : inscripcion.obtenerMateriasCursadas(alumnoComun.getIdAlumno())){
+                                System.out.println("Materia: "+mat.getNombre()+" de "+mat.getAnioMateria());
+                            }
+                        }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    break;
+                    
+                case 16:
+                    if (alumnoComun != null) {
+                        System.out.print("Desea listar las materias NO cursadas del alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        if(scan.next().startsWith("s")){
+                            System.out.println(" --------- MATERIAS NO CURSADAS POR "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
+                            for(Materia mat : inscripcion.obtenerMateriasNoCursadas(alumnoComun.getIdAlumno())){
+                                System.out.println("Materia: "+mat.getNombre()+" de "+mat.getAnioMateria());
+                            }
+                        }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    break;
+                    
+                case 17:
+                    if(materiaComun != null && alumnoComun != null){
+                        System.out.print("Desea eliminar la inscripcion del alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
+                                            +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
+                        if (scan.next().startsWith("s")) {
+                            inscripcion.borrarInscripcionMateriaAlumno(alumnoComun.getIdAlumno(), materiaComun.getIdMateria());
+                            
+                        }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
+                    }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
+                    
+                    break;
+                    
+                case 18:
+                    if(materiaComun != null && alumnoComun != null){
+                        System.out.print("Desea actualizar la nota del alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
+                                            +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
+                        if (scan.next().startsWith("s")) {
+                            System.out.print("Ingrese la nota -->");
+                            inscripcion.actualizarNota(alumnoComun.getIdAlumno(), materiaComun.getIdMateria(),scan.nextDouble());
+                            
+                        }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
+                    }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
+                    
+                    break;
+                    
+                case 19:
+                    if (materiaComun != null) {
+                        System.out.print("Desea listar los alumnos inscriptos en la materia "+materiaComun.getNombre()+" de "+materiaComun.getAnioMateria()+" ° anio ? (s/n) -->");
+                        if(scan.next().startsWith("s")){
+                            System.out.println(" --------- ALUMNOS INSCRIPTOS EN "+materiaComun.getNombre()+" de "+materiaComun.getAnioMateria()+" ° anio ----------");
+                            for(Alumno alu : inscripcion.obtenerAlumnosXMateria(materiaComun.getIdMateria())){
+                                System.out.println("Alumno: "+alu.getNombre()+", "+alu.getApellido()+" DNI: "+alu.getDni());
+                            }
+                        }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                    break;
             }
-        }while(opc != 12);
-        
-        //alumno.guardarAlumno(new Alumno(1,23454321,"Lopez","Gerardo",LocalDate.of(2002, Month.MARCH, 23),true));
-        
-        //System.out.println(alumno.bucarAlumno(40));
-        
-        //System.out.println(alumno.buscarAlumnoPorDni(55555555));
-        
-        //System.out.println(alumno.listarAlumnos());
-        
-        //Alumno alumnoComun = alumno.bucarAlumno(40);
-        
-        //alumnoComun.setApellido("Velazquez");
-        
-        //alumno.modificarAlumno(alumnoComun);
-        
-        //alumno.eliminarAlumno(40);
-        
-        //MateriaData materia = new MateriaData();
-        
-        //materia.guardarMateria(new Materia("Lengua", 2, true));
-        
-        //System.out.println(materia.buscarMateria(3));
-        
-        //Materia materiaComun = new Materia("Filosofia", 1, true);
-        //materia.eliminarMateria(8);
-        //System.out.println(materia.listarMaterias());
+        }while(opc != 20);
     }
 
 }
