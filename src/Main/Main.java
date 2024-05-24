@@ -312,8 +312,8 @@ public class Main {
                             for(Alumno alu : inscripcion.obtenerAlumnosXMateria(materiaComun.getIdMateria())){
                                 System.out.println("Alumno: "+alu.getNombre()+", "+alu.getApellido()+" DNI: "+alu.getDni());
                             }
-                        }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
-                    }else System.out.println("Debe seleccionar un alumno mediante la busqueda del menu");
+                        }else System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
+                    }else System.out.println("Debe seleccionar una materia mediante la busqueda del menu");
                     break;
             }
         }while(opc != 20);
@@ -321,9 +321,9 @@ public class Main {
     
     public static void verAlumnoMateriaSeleccionados(Alumno alu, Materia mat){
         System.out.println("\n---  ALUMNO Y MATERIA SELECCIONADOS ---");
-        if (alu != null) System.out.println("Alumno: "+alu.getApellido()+", "+alu.getApellido());
+        if (alu != null) System.out.println("ID: "+alu.getIdAlumno()+" - "+"Alumno: "+alu.getApellido()+", "+alu.getNombre());
         else System.out.println("ALUMNO -> NINGUNO");
-        if (mat != null) System.out.println("Materia: "+mat.getNombre()+" de "+mat.getAnioMateria()+" anio");
+        if (mat != null) System.out.println("ID: "+mat.getIdMateria()+" - "+"Materia: "+mat.getNombre()+" de "+mat.getAnioMateria()+" anio");
         else System.out.println("MATERIA -> NINGUNA");
         System.out.println("----------------------------------------");
     }

@@ -173,7 +173,7 @@ public class InscripcionData {
     
     public void borrarInscripcionMateriaAlumno(int idAlumno, int idMateria){
         try{
-            String sql = "delete inscripcion where idAlumno = ? anda idMateria = ? ";                
+            String sql = "delete from inscripcion where idAlumno = ? and idMateria = ? ";                
             PreparedStatement ps = con.prepareStatement(sql);    
             ps.setInt(1, idAlumno);
             ps.setInt(2, idMateria);
@@ -190,12 +190,14 @@ public class InscripcionData {
     
     public void actualizarNota(int idAlumno, int idMateria, double nota){
         try{
-            String sql = "update inscripcion set nota = ? where idAlumno = ? and idMateria = ?";
+            System.out.println("id alumno: "+idAlumno+" id materia: "+idMateria+" nota:"+nota);
+            String sql = "update inscripcion set nota = ? where idAlumno = ? and idMateria = ? ";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
             ps.setInt(3, idMateria);
-            int filas = ps.executeUpdate(sql);
+            System.out.println(ps.toString());
+            int filas = ps.executeUpdate();
             if(filas > 0) JOptionPane.showMessageDialog(null, "La nota fue actualizada");
             else JOptionPane.showMessageDialog(null, "No existe esa inscripcion para modificar la nota, por favor inscriba al alumno en la materia");
             ps.close();
@@ -209,10 +211,10 @@ public class InscripcionData {
     public List<Alumno> obtenerAlumnosXMateria(int idMateria){
         List<Alumno> alumnos = new ArrayList<>();
         try{
-            String sql = "select a.idAlumno, a.nombre, a.apellido, a.dni, a.fechaNacim"
+            String sql = "select a.idAlumno, a.nombre, a.apellido, a.dni, a.fechaNacimiento "
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
-                    + "join materia m on m.idMateria = i.idInscripcion "
+                    + "join materia m on m.idMateria = i.idMateria "
                     + "where a.estado = 1 and m.estado = 1 "
                     + "and m.idMateria = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -224,7 +226,7 @@ public class InscripcionData {
                 alumno.setDni(rs.getInt("dni"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setApellido(rs.getString("apellido"));
-                alumno.setFechaNac(rs.getDate("fechaNacim").toLocalDate());
+                alumno.setFechaNac(rs.getDate("fechaNacimiento").toLocalDate());
                 alumnos.add(alumno);
             }
         }catch(SQLException ex){
