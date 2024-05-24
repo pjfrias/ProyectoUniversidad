@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -52,9 +51,9 @@ public class InscripcionData {
             String sql = "select a.idAlumno id_alumno, a.fechaNacimiento fecha, a.nombre nombre_alumno , a.apellido ,a.dni, "
                     + "m.nombre nom_materia, m.idMateria id_materia, m.anio, i.nota "
                     + "from inscripcion i "
-                    + "join alumno a on a.idAlumno=i.idAlumno "
-                    + "join materia m on m.idMateria=i.idMateria "
-                    + "where a.estado= 1 and m.estado=1";
+                    + "join alumno a on a.idAlumno = i.idAlumno "
+                    + "join materia m on m.idMateria = i.idMateria "
+                    + "where a.estado = 1 and m.estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);  
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
@@ -90,7 +89,7 @@ public class InscripcionData {
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
                     + "join materia m on m.idMateria = i.idMateria "
-                    + "where a.estado = 1 and m.estado = 1"
+                    + "where a.estado = 1 and m.estado = 1 "
                     + "and a.idAlumno = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -124,10 +123,10 @@ public class InscripcionData {
         try{
             String sql = "select m.nombre, m.id, m.anio, i.nota "
                     + "from inscripcion i "
-                    + "join alumno a on a.idAlumno=i.idAlumno "
-                    + "join materia m on m.idMateria=i.idMateria "
-                    + "where a.estado= 1 and m.estado=1"
-                    + "and a.idAlumno = ?"
+                    + "join alumno a on a.idAlumno = i.idAlumno "
+                    + "join materia m on m.idMateria = i.idMateria "
+                    + "where a.estado = 1 and m.estado = 1 "
+                    + "and a.idAlumno = ? "
                     + "and i.nota != -1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -152,8 +151,8 @@ public class InscripcionData {
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
                     + "join materia m on m.idMateria = i.idMateria "
-                    + "where a.estado = 1 and m.estado = 1"
-                    + "and a.idAlumno = ?"
+                    + "where a.estado = 1 and m.estado = 1 "
+                    + "and a.idAlumno = ? "
                     + "and i.nota = -1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -207,7 +206,7 @@ public class InscripcionData {
             String sql = "select a.idAlumno, a.nombre, a.apellido, a.dni, a.fechaNacim"
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
-                    + "where a.estado = 1 and m.estado = 1"
+                    + "where a.estado = 1 and m.estado = 1 "
                     + "and a.idMateria = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria);
