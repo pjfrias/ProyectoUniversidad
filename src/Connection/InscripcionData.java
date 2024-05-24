@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import sun.security.rsa.RSACore;
 
 public class InscripcionData {
     private Connection con;
@@ -121,7 +122,7 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasCursadas(int id){
         List<Materia> materias = new ArrayList<>();
         try{
-            String sql = "select m.nombre, m.id, m.anio, i.nota "
+            String sql = "select m.nombre, m.idMateria, m.anio, i.nota "
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
                     + "join materia m on m.idMateria = i.idMateria "
@@ -134,7 +135,7 @@ public class InscripcionData {
             while(rs.next()){
                 Materia materia=new Materia();
                 materia.setNombre(rs.getString("nombre"));
-                materia.setIdMateria(rs.getInt("id"));
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materias.add(materia); 
             }
@@ -147,7 +148,7 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasNoCursadas(int id){
         List<Materia> materias = new ArrayList<>();
         try{
-            String sql = "select m.nombre, m.id, m.anio, i.nota "
+            String sql = "select m.nombre, m.idMateria, m.anio, i.nota "
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
                     + "join materia m on m.idMateria = i.idMateria "
@@ -160,7 +161,7 @@ public class InscripcionData {
             while(rs.next()){
                 Materia materia=new Materia();
                 materia.setNombre(rs.getString("nombre"));
-                materia.setIdMateria(rs.getInt("id"));
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setAnioMateria(rs.getInt("anio"));
                 materias.add(materia); 
             }
@@ -189,14 +190,19 @@ public class InscripcionData {
     
     public void actualizarNota(int idAlumno, int idMateria, double nota){
         try{
-            String sql = "update inscripcion set nota = ? where idAlumno = ? anda idMateria = ?";
+            String sql = "update inscripcion set nota = ? where idAlumno = ? and idMateria = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, nota);
             ps.setInt(2, idAlumno);
             ps.setInt(3, idMateria);
+            int filas = ps.executeUpdate(sql);
+            if(filas > 0) JOptionPane.showMessageDialog(null, "La nota fue actualizada");
+            else JOptionPane.showMessageDialog(null, "No existe esa inscripcion para modificar la nota, por favor inscriba al alumno en la materia");
             ps.close();
+           
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Inscricpion");
+            ex.printStackTrace();
         }
     }
     
@@ -206,8 +212,9 @@ public class InscripcionData {
             String sql = "select a.idAlumno, a.nombre, a.apellido, a.dni, a.fechaNacim"
                     + "from inscripcion i "
                     + "join alumno a on a.idAlumno = i.idAlumno "
+                    + "join materia m on m.idMateria = i.idInscripcion "
                     + "where a.estado = 1 and m.estado = 1 "
-                    + "and a.idMateria = ?";
+                    + "and m.idMateria = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idMateria);
             ResultSet rs = ps.executeQuery();

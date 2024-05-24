@@ -101,9 +101,9 @@ public class Main {
                     break;
 
                 case 4:
-                    
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(alumnoComun != null){
-                        System.out.print("Desea actualizar al alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+"(s/n) -->");
+                        System.out.print("Desea actualizar al alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" (s/n) -->");
                         
                         if(scan.next().startsWith("s")){
                             System.out.print("Ingrese el DNI -->");
@@ -138,9 +138,9 @@ public class Main {
                     break;
 
                 case 6:
-                    
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(alumnoComun != null){
-                        System.out.print("Desea borrar al alumno actual (s/n)"+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" -->");
+                        System.out.print("Desea borrar al alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" (s/n) -->");
                         
                         if(scan.next().startsWith("s"))
                             alumno.eliminarAlumno(alumnoComun.getIdAlumno());
@@ -151,28 +151,31 @@ public class Main {
                     break;
 
                 case 7:
-                        System.out.print("Ingrese el nombre de la materia -->");
-                        String nombreMateria = scan.next();
-                        System.out.print("Ingrese el anio de cursado de la materia -->");
-                        int anioCursado = scan.nextInt();
-                        materiaComun = new Materia(nombreMateria, anioCursado, true);
-                        materia.guardarMateria(materiaComun);
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
+                    System.out.print("Ingrese el nombre de la materia -->");
+                    String nombreMateria = scan.next();
+                    System.out.print("Ingrese el anio de cursado de la materia -->");
+                    int anioCursado = scan.nextInt();
+                    materiaComun = new Materia(nombreMateria, anioCursado, true);
+                    materia.guardarMateria(materiaComun);
                     break;
 
                 case 8:
-                        System.out.print("Ingrese el id de la materia a buscar -->");
-                        id = scan.nextInt();
-                        materiaComun = materia.buscarMateria(id);
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
+                    System.out.print("Ingrese el id de la materia a buscar -->");
+                    id = scan.nextInt();
+                    materiaComun = materia.buscarMateria(id);
 
-                        if(materiaComun != null){
-                            System.out.println(materiaComun);
-                        }
+                    if(materiaComun != null){
+                        System.out.println(materiaComun);
+                    }
                     break;
                     
                 case 9:
-                        if(materiaComun != null){
-                        System.out.print("Desea actualizar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+"--> ");
-                        
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
+                    if(materiaComun != null){
+                        System.out.print("Desea actualizar la materia actual "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" (s/n) --> ");
+
                         if(scan.next().startsWith("s")){
                             System.out.print("Ingrese el nombre de la materia -->");
                             materiaComun.setNombre(scan.next());
@@ -195,8 +198,9 @@ public class Main {
                     break;
 
                 case 11:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(materiaComun != null){
-                    System.out.print("Desea borrar la materia actual (s/n) "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" -->");
+                    System.out.print("Desea borrar la materia actual "+materiaComun.getNombre()+", "+materiaComun.getAnioMateria()+" (s/n) -->");
 
                     if(scan.next().startsWith("s"))
                         materia.eliminarMateria(materiaComun.getIdMateria());
@@ -207,6 +211,7 @@ public class Main {
                     break;
                     
                 case 12:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(materiaComun != null && alumnoComun != null){
                         System.out.print("Desea inscribir al alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
                                             +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
@@ -222,6 +227,7 @@ public class Main {
                     break;
                     
                 case 13:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     System.out.println(" --------- INSCRIPCIONES REGISTRADAS ----------");
                     for (Inscripcion inscr : inscripcion.obtenerInscripciones()) {
                         System.out.println("Inscripcion nro: "+inscr.getIdInscripcion()+" - Alumno: "+inscr.getAlumno().getApellido()+", "+inscr.getAlumno().getNombre()+
@@ -231,8 +237,9 @@ public class Main {
                     break;
                     
                 case 14:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if (alumnoComun != null) {
-                    System.out.print("Desea listar las inscripciones del alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+"(s/n)--> ");
+                    System.out.print("Desea listar las inscripciones del alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" (s/n)--> ");
                         if(scan.next().startsWith("s")){
                             System.out.println(" --------- INSCRIPCIONES DE "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
                             for(Inscripcion inscr : inscripcion.obtenerInscripcionesPorAlumno(alumnoComun.getIdAlumno())){
@@ -245,8 +252,9 @@ public class Main {
                     break;
                     
                 case 15:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if (alumnoComun != null) {
-                        System.out.print("Desea listar las materias cursadas del alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        System.out.print("Desea listar las materias cursadas del alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" (s/n)-->");
                         if(scan.next().startsWith("s")){
                             System.out.println(" --------- MATERIAS CURSADAS POR "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
                             for(Materia mat : inscripcion.obtenerMateriasCursadas(alumnoComun.getIdAlumno())){
@@ -257,8 +265,9 @@ public class Main {
                     break;
                     
                 case 16:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if (alumnoComun != null) {
-                        System.out.print("Desea listar las materias NO cursadas del alumno actual (s/n)--> "+alumnoComun.getApellido()+", "+alumnoComun.getNombre() );
+                        System.out.print("Desea listar las materias NO cursadas del alumno actual "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" (s/n)-->");
                         if(scan.next().startsWith("s")){
                             System.out.println(" --------- MATERIAS NO CURSADAS POR "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()+" ----------");
                             for(Materia mat : inscripcion.obtenerMateriasNoCursadas(alumnoComun.getIdAlumno())){
@@ -269,6 +278,7 @@ public class Main {
                     break;
                     
                 case 17:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(materiaComun != null && alumnoComun != null){
                         System.out.print("Desea eliminar la inscripcion del alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
                                             +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
@@ -281,19 +291,20 @@ public class Main {
                     break;
                     
                 case 18:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if(materiaComun != null && alumnoComun != null){
                         System.out.print("Desea actualizar la nota del alumno "+alumnoComun.getApellido()+", "+alumnoComun.getNombre()
                                             +" en la materia "+materiaComun.getNombre()+" ? (s/n) -->");
                         if (scan.next().startsWith("s")) {
                             System.out.print("Ingrese la nota -->");
                             inscripcion.actualizarNota(alumnoComun.getIdAlumno(), materiaComun.getIdMateria(),scan.nextDouble());
-                            
-                        }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
-                    }else System.out.println("Debe realizar las busquedas del alumno y materia a desinscribir.");
+                        }else System.out.println("Debe realizar las busquedas del alumno y materia para cambiar la nota.");
+                    }else System.out.println("Debe realizar las busquedas del alumno y materia para cambair la nota.");
                     
                     break;
                     
                 case 19:
+                    verAlumnoMateriaSeleccionados(alumnoComun,materiaComun);
                     if (materiaComun != null) {
                         System.out.print("Desea listar los alumnos inscriptos en la materia "+materiaComun.getNombre()+" de "+materiaComun.getAnioMateria()+" ° anio ? (s/n) -->");
                         if(scan.next().startsWith("s")){
@@ -306,6 +317,15 @@ public class Main {
                     break;
             }
         }while(opc != 20);
+    }
+    
+    public static void verAlumnoMateriaSeleccionados(Alumno alu, Materia mat){
+        System.out.println("\n---  ALUMNO Y MATERIA SELECCIONADOS ---");
+        if (alu != null) System.out.println("Alumno: "+alu.getApellido()+", "+alu.getApellido());
+        else System.out.println("ALUMNO -> NINGUNO");
+        if (mat != null) System.out.println("Materia: "+mat.getNombre()+" de "+mat.getAnioMateria()+" anio");
+        else System.out.println("MATERIA -> NINGUNA");
+        System.out.println("----------------------------------------");
     }
 
 }
