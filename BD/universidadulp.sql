@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2024 a las 01:28:23
+-- Tiempo de generación: 27-05-2024 a las 00:22:39
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -44,7 +44,7 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 (33, 12345678, 'Gonzales', 'Maria', '2000-03-15', 1),
 (34, 87654321, 'Martínez', 'Juan', '1999-07-20', 1),
 (35, 55555555, 'López', 'Pedro', '2001-05-10', 1),
-(40, 23454321, 'Velazquez', 'Gerardo', '2002-03-23', 0),
+(40, 23454321, 'Velazquez', 'Gerardo', '2002-03-23', 1),
 (41, 11111111, 'oste', 'javier', '2000-12-25', 1);
 
 -- --------------------------------------------------------
@@ -65,7 +65,6 @@ CREATE TABLE `inscripcion` (
 --
 
 INSERT INTO `inscripcion` (`idInscripcion`, `nota`, `idALumno`, `idMateria`) VALUES
-(15, 7, 33, 1),
 (16, 6, 33, 3),
 (17, 9, 34, 2),
 (18, 6, 34, 3),
@@ -91,10 +90,10 @@ CREATE TABLE `materia` (
 INSERT INTO `materia` (`idMateria`, `nombre`, `anio`, `estado`) VALUES
 (1, 'Matemáticas', 1, 1),
 (2, 'Historia', 1, 1),
-(3, 'Ciencias', 2, 0),
+(3, 'Ciencias', 2, 1),
 (4, 'Literatura', 2, 1),
 (8, 'Idiomas', 2, 1),
-(10, 'Filosofia', 2, 0);
+(10, 'Filosofia', 2, 1);
 
 --
 -- Índices para tablas volcadas
