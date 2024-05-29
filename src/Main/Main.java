@@ -335,12 +335,15 @@
 package Main;
 
 import Views.JFUniversidad;
+import javax.swing.JFrame;
 
 public class Main {
 
     public static void main(String[] args) {
         JFUniversidad universidad = new JFUniversidad();
+        universidad.setExtendedState(JFrame.MAXIMIZED_BOTH); //aparece la pantalla maximizada
         universidad.setVisible(true);
+        
     }
 
 }
