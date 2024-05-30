@@ -344,6 +344,7 @@ public class Main {
         universidad.setExtendedState(JFrame.MAXIMIZED_BOTH); //aparece la pantalla maximizada
         universidad.setVisible(true);
         
+        
     }
 
 }
