@@ -8,6 +8,8 @@ package Views;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -32,15 +34,9 @@ public class JFUniversidad extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono = new ImageIcon(getClass().getResource("/views/UniversidadULP.jpg"));
-        Image miImagen = icono.getImage();
-        jDesktopPane1 = new javax.swing.JDesktopPane(){
-            public void paintComponent(Graphics g){
-                g.drawImage(miImagen,0,0,getWidth(),getHeight(),this);
-            }
-        };
+        panelGeneral = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMAlumno = new javax.swing.JMenu();
+        jMIAlumno = new javax.swing.JMenu();
         jMIFormAlumno = new javax.swing.JMenuItem();
         jMMateria = new javax.swing.JMenu();
         jMIFormMateria = new javax.swing.JMenuItem();
@@ -54,23 +50,28 @@ public class JFUniversidad extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestion Universidad");
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1292, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
+        panelGeneral.setLayout(panelGeneralLayout);
+        panelGeneralLayout.setHorizontalGroup(
+            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 740, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 856, Short.MAX_VALUE)
+        panelGeneralLayout.setVerticalGroup(
+            panelGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 551, Short.MAX_VALUE)
         );
 
-        jMAlumno.setText("Alumno");
+        jMIAlumno.setText("Alumno");
 
         jMIFormAlumno.setText("Formulario de Alumno");
-        jMAlumno.add(jMIFormAlumno);
+        jMIFormAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFormAlumnoActionPerformed(evt);
+            }
+        });
+        jMIAlumno.add(jMIFormAlumno);
 
-        jMenuBar1.add(jMAlumno);
+        jMenuBar1.add(jMIAlumno);
 
         jMMateria.setText("Materia");
 
@@ -106,28 +107,42 @@ public class JFUniversidad extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1)
-                .addContainerGap())
+                .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMIFormAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormAlumnoActionPerformed
+       panelGeneral.removeAll();
+       panelGeneral.repaint();
+       JIFAlumno panelAlumno= new JIFAlumno();
+       panelAlumno.setVisible(true);
+       panelGeneral.add(panelAlumno);
+       panelGeneral.moveToFront(panelAlumno);
+       
+       
+      
+       
+      
+       
+               
+       
+    }//GEN-LAST:event_jMIFormAlumnoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMAdministracion;
-    private javax.swing.JMenu jMAlumno;
     private javax.swing.JMenu jMConsultas;
     private javax.swing.JMenuItem jMIAlumPorMat;
+    private javax.swing.JMenu jMIAlumno;
     private javax.swing.JMenuItem jMIFormAlumno;
     private javax.swing.JMenuItem jMIFormMateria;
     private javax.swing.JMenuItem jMIInscripciones;
@@ -135,5 +150,6 @@ public class JFUniversidad extends javax.swing.JFrame {
     private javax.swing.JMenu jMMateria;
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JDesktopPane panelGeneral;
     // End of variables declaration//GEN-END:variables
 }
