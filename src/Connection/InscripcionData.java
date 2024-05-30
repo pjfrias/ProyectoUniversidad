@@ -23,10 +23,10 @@ public class InscripcionData {
     }
     
     public void guardarInscripcion(Inscripcion inscripcion){
-       String sql = "INSERT INTO incripcion(nota, idAlumno, idMateria) "
+       String sql = "INSERT INTO inscripcion(nota, idAlumno, idMateria) "
                 + "VALUES (?, ?, ?)";
        try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);            
             ps.setDouble(1, inscripcion.getNota());
             ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
             ps.setInt(3, inscripcion.getMateria().getIdMateria()); 
@@ -148,13 +148,10 @@ public class InscripcionData {
     public List<Materia> obtenerMateriasNoCursadas(int id){
         List<Materia> materias = new ArrayList<>();
         try{
-            String sql = "select m.nombre, m.idMateria, m.anio, i.nota "
-                    + "from inscripcion i "
-                    + "join alumno a on a.idAlumno = i.idAlumno "
-                    + "join materia m on m.idMateria = i.idMateria "
-                    + "where a.estado = 1 and m.estado = 1 "
-                    + "and a.idAlumno = ? "
-                    + "and i.nota = -1";
+            String sql = "SELECT m.nombre, m.idMateria, m.anio "
+           + "FROM materia m "
+           + "LEFT JOIN inscripcion i ON m.idMateria = i.idMateria AND i.idAlumno = ? "
+           + "WHERE m.estado = 1 AND i.idMateria IS NULL";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
