@@ -5,6 +5,7 @@
  */
 package Views;
 
+import Entidades.Materia;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -75,6 +76,11 @@ public class JFUniversidad extends javax.swing.JFrame {
         jMMateria.setText("Materia");
 
         jMIFormMateria.setText("Formulario de Materia");
+        jMIFormMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFormMateriaActionPerformed(evt);
+            }
+        });
         jMMateria.add(jMIFormMateria);
 
         jMenuBar1.add(jMMateria);
@@ -197,6 +203,21 @@ public class JFUniversidad extends javax.swing.JFrame {
         jDesktopPane1.add(inscripciones);
         jDesktopPane1.moveToFront(inscripciones);
     }//GEN-LAST:event_jMIInscripcionesActionPerformed
+
+    
+    
+    
+    private void jMIFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormMateriaActionPerformed
+        // TODO add your handling code here:
+        JIFMaterias menuMateria= new JIFMaterias();
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        menuMateria.setVisible(true);
+        jDesktopPane1.add(menuMateria);
+        jDesktopPane1.moveToFront(menuMateria);
+        
+        
+    }//GEN-LAST:event_jMIFormMateriaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
