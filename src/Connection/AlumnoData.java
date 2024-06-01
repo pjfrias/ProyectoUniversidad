@@ -32,8 +32,7 @@ public class AlumnoData {
             if(rs.next()){
                 //System.out.println(rs.findColumn("idAlumno")+"");
                 alumno.setIdAlumno(rs.getInt("idAlumno")); 
-                JOptionPane.showMessageDialog(null, "Alumno añadido con exito."); 
-                
+                JOptionPane.showMessageDialog(null, "Alumno añadido con exito.");
             }
             ps.close();
         }catch(SQLException ex){
