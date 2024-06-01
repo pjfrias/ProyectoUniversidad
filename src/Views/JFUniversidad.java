@@ -69,6 +69,11 @@ public class JFUniversidad extends javax.swing.JFrame {
         jMAlumno.setText("Alumno");
 
         jMIFormAlumno.setText("Formulario de Alumno");
+        jMIFormAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMIFormAlumnoActionPerformed(evt);
+            }
+        });
         jMAlumno.add(jMIFormAlumno);
 
         jMenuBar1.add(jMAlumno);
@@ -218,6 +223,15 @@ public class JFUniversidad extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jMIFormMateriaActionPerformed
+
+    private void jMIFormAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIFormAlumnoActionPerformed
+        JIFAlumno alumno = new JIFAlumno();
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        alumno.setVisible(true);
+        jDesktopPane1.add(alumno);
+        jDesktopPane1.moveToFront(alumno);
+    }//GEN-LAST:event_jMIFormAlumnoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
