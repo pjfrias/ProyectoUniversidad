@@ -109,7 +109,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                 .addComponent(btnGuardar)
                 .addGap(18, 18, 18)
                 .addComponent(btnSalir)
-                .addGap(0, 76, Short.MAX_VALUE))
+                .addGap(0, 99, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(localeFechaNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,7 +136,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
                                     .addComponent(btnBuscar))
                                 .addComponent(jLabel1)
                                 .addComponent(radioEstado))))
-                    .addContainerGap(58, Short.MAX_VALUE)))
+                    .addContainerGap(152, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
