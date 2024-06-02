@@ -2,6 +2,7 @@ package Views;
 
 import Connection.AlumnoData;
 import Entidades.Alumno;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -15,7 +16,7 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
     public JIFAlumno() {
         initComponents();
         alumnoData = new AlumnoData();
-        alumno = new Alumno();
+        alumno = null;
     }
     
     private void limpiarCampos(){
@@ -207,15 +208,29 @@ public class JIFAlumno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        alumno.setDni(Integer.parseInt(txtDocumento.getText()));
-        alumno.setNombre(txtNombre.getText());
-        alumno.setApellido(txtApellido.getText());
-        if(radioEstado.isSelected()) alumno.setActivo(true);
-        else alumno.setActivo(false);
-        Date selectedDate = localeFechaNacimiento.getDate();
-        alumno.setFechaNac(selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        alumnoData.guardarAlumno(alumno);
-        limpiarCampos();
+        try{
+            int dni = Integer.parseInt(txtDocumento.getText());
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            boolean estado;
+            if(radioEstado.isSelected()) estado = true;
+            else estado = false;
+            Date selectedDate = localeFechaNacimiento.getDate();
+            LocalDate fechaNacimiento = selectedDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            if(alumno == null){
+                alumno = new Alumno(dni, apellido, nombre, fechaNacimiento, true);
+                alumnoData.guardarAlumno(alumno);
+            }else{
+                alumno = new Alumno(alumno.getIdAlumno(), dni, apellido, nombre, fechaNacimiento, true);
+                alumnoData.modificarAlumno(alumno);
+            }
+            limpiarCampos();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Llene todos los campos");
+        }
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

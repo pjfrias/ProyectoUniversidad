@@ -2,6 +2,7 @@
 package Entidades;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Alumno {
     private int idAlumno;
@@ -83,8 +84,4 @@ public class Alumno {
     public String toString() {
         return  dni + ", " + apellido + ", " + nombre;
     }
-
-    
-    
-    
 }
